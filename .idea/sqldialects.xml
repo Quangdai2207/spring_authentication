@@ -2,6 +2,8 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/seeding/src/main/resources/db/migration/V1__insert_role.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/seeding/src/main/resources/db/migration/V1__insert_role_1.sql" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/seeding/src/main/resources/db/migration/V2__insert_user.sql" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/seeding/src/main/resources/db/migration/V2__insert_user_1.sql" dialect="GenericSQL" />
   </component>
 </project>

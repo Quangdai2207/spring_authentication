@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
-import java.util.Set;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
@@ -34,7 +34,8 @@ public class UserDetailsCustom implements UserDetailsService {
         UserEntity user = userRepositories.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
 
-        Set<UserRole> roles = userRoleRepositories.findByUser(user);
+        List<UserRole> roles = userRoleRepositories.findByUser(user);
+        roles.forEach(role -> System.out.println(role.getRole().getName()));
 
         return User.builder()
                 .username(user.getEmail())
@@ -43,7 +44,7 @@ public class UserDetailsCustom implements UserDetailsService {
                 .build();
     }
 
-    private Collection<GrantedAuthority> mapToGrantedAuthorities(Set<UserRole> roles) {
+    private Collection<GrantedAuthority> mapToGrantedAuthorities(List<UserRole> roles) {
         return roles.stream()
                 .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRole().getName()))
                 .collect(Collectors

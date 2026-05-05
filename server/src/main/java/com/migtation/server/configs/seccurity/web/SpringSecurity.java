@@ -54,9 +54,9 @@ public class SpringSecurity implements WebMvcConfigurer {
                                     "/swagger-ui/**",
                                     "/v3/api-docs/**"
                             ).permitAll()
-                            .requestMatchers("/admin/**").hasAnyRole("ADMIN", "SUPER_ADMIN")
-                            .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN", "SUPER_ADMIN")
-                            .requestMatchers("/super-admin/**").hasAnyRole("SUPER_ADMIN")
+                            .requestMatchers("/api/admin/**").hasAnyRole("ADMIN", "SUPER_ADMIN")
+                            .requestMatchers("/api/user/**").hasAnyRole("USER", "ADMIN", "SUPER_ADMIN")
+                            .requestMatchers("/api/super-admin/**").hasAnyRole("SUPER_ADMIN")
                             .anyRequest().authenticated();
                 })
                 .exceptionHandling(ex -> ex

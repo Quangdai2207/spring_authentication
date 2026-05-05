@@ -47,5 +47,5 @@ public class UserEntity {
     private String password;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<UserRole> userRoles = new HashSet<>();
+    private Set<UserRole> userRoles;
 }

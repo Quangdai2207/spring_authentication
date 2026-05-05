@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Repository
 public interface UserRoleRepositories extends JpaRepository<UserRole, Integer> {
-    Set<UserRole> findByUser(UserEntity user);
+    List<UserRole> findByUser(UserEntity user);
 
     List<UserRole> findByRole(Role role);
 }

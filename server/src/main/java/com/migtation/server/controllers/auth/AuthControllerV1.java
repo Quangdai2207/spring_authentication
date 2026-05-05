@@ -1,51 +1,44 @@
 package com.migtation.server.controllers.auth;
 
-import com.migtation.server.configs.seccurity.ApplicationProperties;
+import com.migtation.server.dtos.request.auth.RequestLogin;
+import com.migtation.server.dtos.request.auth.RequestRegister;
 import com.migtation.server.dtos.response.ApiResponse;
 import com.migtation.server.dtos.response.auth.AuthData;
-import com.migtation.server.dtos.response.auth.AuthStatus;
+import com.migtation.server.dtos.response.user.ResponseUserDetail;
+import com.migtation.server.services.auth.AuthService;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/auth")
 public class AuthControllerV1 {
+    private final AuthService authService;
+    private final PasswordEncoder encoder;
+
+    @Autowired
+    public AuthControllerV1(AuthService authService, PasswordEncoder encoder) {
+        this.authService = authService;
+        this.encoder = encoder;
+    }
 
     @PostMapping("/login")
     public ResponseEntity<ApiResponse<AuthData>> login(
-            @Param("email") String email,
-            @Param("password") String password
+            @RequestBody @Valid RequestLogin body,
+            HttpServletResponse response
     ) {
-        System.out.println("Username: " + email);
-        System.out.println("Password: " + password);
-
-        return null;
+        return authService.login(body, response);
     }
 
     @PostMapping("/register")
-    public ResponseEntity<ApiResponse<AuthData>> register(
-            @Param("firstName") String fName,
-            @Param("lastName") String lName,
-            @Param("email") String email,
-            @Param("phone") String phone,
-            @Param("password") String password,
-            @Param("confirmPassword") String confirmPassword
+    public ResponseEntity<ApiResponse<ResponseUserDetail>> register(
+            @Valid @RequestBody RequestRegister body
     ) {
-        System.out.println("email: " + email);
-        System.out.println("fName: " + fName);
-        System.out.println("lName: " + lName);
-        System.out.println("Phone: " + phone);
-        System.out.println("Password: " + password);
-        System.out.println("Confirm Password: " + confirmPassword);
-
-        return null;
+        return authService.register(body);
     }
 
     @GetMapping("/authenticated")
@@ -53,10 +46,11 @@ public class AuthControllerV1 {
         if (authentication == null || !authentication.isAuthenticated()) {
             return ApiResponse.unauthorize();
         }
-        return ApiResponse.unauthorize(AuthStatus.builder()
-                .status(HttpStatus.OK.value())
-                .success(true)
-                .message(HttpStatus.OK.getReasonPhrase())
-                .build());
+        return ApiResponse.ok();
+    }
+
+    @GetMapping("/logout")
+    public ResponseEntity<ApiResponse<Object>> authenticated(HttpServletResponse response) {
+        return authService.logout(response);
     }
 }
