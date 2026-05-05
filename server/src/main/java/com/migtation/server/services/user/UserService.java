@@ -1,15 +1,21 @@
 package com.migtation.server.services.user;
 
 import com.migtation.server.entities.UserEntity;
+import com.migtation.server.exceptions.NotFoundException;
+import com.migtation.server.repositories.UserRepositories;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
-public class UserService implements IUserService{
+public class UserService implements IUserService {
+    @Autowired
+    private UserRepositories userRepositories;
+
     @Override
-    public Optional<UserEntity> findByEmail(String email) {
-        return Optional.empty();
+    public UserEntity findByEmail(String email) {
+        return userRepositories.findByEmail(email).orElseThrow(() -> new NotFoundException("User not found"));
     }
 
     @Override
@@ -23,8 +29,8 @@ public class UserService implements IUserService{
     }
 
     @Override
-    public Optional<UserEntity> findByPhone(String phone) {
-        return Optional.empty();
+    public UserEntity findByPhone(String phone) {
+        return userRepositories.findByPhone(phone).orElseThrow(() -> new NotFoundException("User not found"));
     }
 
     @Override

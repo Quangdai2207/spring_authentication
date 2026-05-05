@@ -1,9 +1,11 @@
 package com.migtation.server.configs.seccurity.jwt;
 
+import com.migtation.server.configs.seccurity.ApplicationProperties;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
@@ -13,10 +15,14 @@ import java.util.Date;
 
 @Component
 public class JwtProvider {
-    /// Create secret-key bang cau lenh cua chuong trinh openssl: openssl rand -hex 32
-    private static final String rawKey = "8cbcd00526ad8c0794326b99363db523a379577db9378a6f84f98e81e4dab739";
-    private static final Key secretKey = Keys.hmacShaKeyFor(rawKey.getBytes(StandardCharsets.UTF_8));
-    private Long exp = 70000L;
+    private final Key secretKey;
+    private final Long exp;
+
+    @Autowired
+    public JwtProvider(ApplicationProperties props) {
+        this.secretKey = Keys.hmacShaKeyFor(props.getSecretkey().getBytes(StandardCharsets.UTF_8));
+        this.exp = props.getExp();
+    }
 
     public String generateToken(Authentication authentication) {
         String username = authentication.getName();

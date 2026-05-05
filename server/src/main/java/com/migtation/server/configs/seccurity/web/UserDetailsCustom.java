@@ -19,8 +19,8 @@ import java.util.stream.Collectors;
 
 @Component
 public class UserDetailsCustom implements UserDetailsService {
-    private UserRepositories userRepositories;
-    private UserRoleRepositories userRoleRepositories;
+    private final UserRepositories userRepositories;
+    private final UserRoleRepositories userRoleRepositories;
 
     @Autowired
     public UserDetailsCustom(UserRepositories userRepositories, UserRoleRepositories userRoleRepositories) {
