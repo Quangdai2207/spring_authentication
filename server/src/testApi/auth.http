@@ -1,0 +1,36 @@
+GET http://localhost:8080/api/v1/auth/authenticated
+Content-Type: application/json
+Cookie: access_token=yourToken
+
+###
+POST http://localhost:8080/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email" : "example@gmail.com",
+  "password": "Ex@mple"
+}
+
+###
+POST http://localhost:8080/api/v1/auth/register
+Content-Type: application/json
+
+{
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "password": "string",
+  "confirmPassword": "string"
+}
+
+###
+GET http://localhost:8080/api/v1/auth/logout
+Content-Type: application/json
+
+### Test Authorize with ADMIN by role USER
+GET http://localhost:5050/api/admin/v1/welcome
+Content-Type: application/json
+
+### Test Authorize with ADMIN by role USER
+GET http://localhost:5050/api/client/v1/welcome
+Content-Type: application/json
