@@ -88,11 +88,13 @@ public class AuthService implements IAuthService {
 
         Role role = roleRepositories.findById(3).get();
 
+        int count = userRoleRepositories.findAll().size();
         UserRole userRole = UserRole.builder()
                 .user(user)
                 .role(role)
                 .build();
 
+        userRole.setId(count++);
         userRoleRepositories.save(userRole);
 
         return ApiResponse.created(ResponseUserDetail.builder()
