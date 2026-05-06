@@ -1,8 +1,6 @@
-package com.migtation.server.services.user;
+package com.migtation.server.services.auth.au_service_v1.user;
 
 import com.migtation.server.entities.UserEntity;
-
-import java.util.Optional;
 
 public interface IUserService {
     UserEntity findByEmail(String email);

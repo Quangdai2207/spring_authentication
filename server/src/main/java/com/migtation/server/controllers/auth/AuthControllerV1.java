@@ -5,7 +5,7 @@ import com.migtation.server.dtos.request.auth.RequestRegister;
 import com.migtation.server.dtos.response.ApiResponse;
 import com.migtation.server.dtos.response.auth.AuthData;
 import com.migtation.server.dtos.response.user.ResponseUserDetail;
-import com.migtation.server.services.auth.AuthService;
+import com.migtation.server.services.auth.au_service_v1.AuthService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

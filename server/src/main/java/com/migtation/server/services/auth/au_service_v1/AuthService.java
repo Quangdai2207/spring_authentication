@@ -1,4 +1,4 @@
-package com.migtation.server.services.auth;
+package com.migtation.server.services.auth.au_service_v1;
 
 import com.migtation.server.configs.seccurity.jwt.JwtProvider;
 import com.migtation.server.dtos.request.auth.RequestLogin;
@@ -25,9 +25,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Service
 public class AuthService implements IAuthService {

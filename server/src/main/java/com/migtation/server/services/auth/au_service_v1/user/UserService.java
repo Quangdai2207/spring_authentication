@@ -1,12 +1,10 @@
-package com.migtation.server.services.user;
+package com.migtation.server.services.auth.au_service_v1.user;
 
 import com.migtation.server.entities.UserEntity;
 import com.migtation.server.exceptions.NotFoundException;
 import com.migtation.server.repositories.UserRepositories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class UserService implements IUserService {

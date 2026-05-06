@@ -45,6 +45,7 @@ public class SpringSecurity implements WebMvcConfigurer {
         http
                 .cors(cors -> cors.configurationSource(corsConfigOrigin.corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
+
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers(
                                     "/",
@@ -65,6 +66,7 @@ public class SpringSecurity implements WebMvcConfigurer {
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilterChains, UsernamePasswordAuthenticationFilter.class);
+
         http.authenticationProvider(authenticationProviderCustom.authenticationProvider());
         http.headers(headers -> headers
                 .frameOptions(frame -> frame.sameOrigin())
@@ -72,6 +74,7 @@ public class SpringSecurity implements WebMvcConfigurer {
                         .policyDirectives("default-src 'self'")
                 )
         );
+
         http.httpBasic(AbstractHttpConfigurer::disable);
         http.formLogin(AbstractHttpConfigurer::disable);
         return http.build();

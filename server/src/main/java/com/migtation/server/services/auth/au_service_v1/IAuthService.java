@@ -1,4 +1,4 @@
-package com.migtation.server.services.auth;
+package com.migtation.server.services.auth.au_service_v1;
 
 import com.migtation.server.dtos.request.auth.RequestLogin;
 import com.migtation.server.dtos.request.auth.RequestRegister;

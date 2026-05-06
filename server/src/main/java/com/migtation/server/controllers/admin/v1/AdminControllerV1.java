@@ -1,4 +1,4 @@
-package com.migtation.server.controllers.adminControllers;
+package com.migtation.server.controllers.admin.v1;
 
 import com.migtation.server.dtos.response.ApiResponse;
 import org.springframework.http.ResponseEntity;
