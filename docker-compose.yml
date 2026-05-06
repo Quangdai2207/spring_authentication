@@ -1,0 +1,78 @@
+services:
+  # Service database - POSTGRES, first run to init DB
+  db:
+    image: postgres:15
+    container_name: postgres-db
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_NAME} # DB NAME
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${DB_USERNAME}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Service BE Core APIs
+  server:
+    build: ./server
+    container_name: server
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/${DB_NAME} # DB NAME
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRE: ${JWT_EXPIRE}
+    depends_on:
+      db:
+        condition: service_healthy
+      flyway:
+        condition: service_completed_successfully
+
+  # Service FE - React TS
+  fe_auth:
+    build: ./fe_auth
+    container_name: fe_auth
+    ports:
+      - "3000:3000"
+
+  # Service Flyway
+  flyway:
+    image: flyway/flyway
+    container_name: flyway-migration
+    restart: on-failure
+    command: >
+      -url=jdbc:postgresql://db:5432/${DB_NAME}
+      -user=${DB_USERNAME}
+      -password=${DB_PASSWORD}
+      -connectRetries=60
+      migrate
+    volumes:
+      - ./migration/sql:/flyway/sql
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # Service p4admin for POSTGRES DB
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
+    depends_on:
+      - db
+
+volumes:
+  db-data:
