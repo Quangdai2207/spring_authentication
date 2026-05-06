@@ -40,7 +40,7 @@ public class UserControllerAdmin {
     }
 
     @PostMapping(
-            value = "/}",
+            value = "/",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )

@@ -39,11 +39,11 @@ public class UserControllerClient {
     }
 
     @PostMapping(
-            value = "/}",
+            value = "/",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<ApiResponse<Object>> createUser(
+    public ResponseEntity<ApiResponse<Object>> create(
             @Valid @RequestBody RequestCreateUser body
     ) {
         return null;
