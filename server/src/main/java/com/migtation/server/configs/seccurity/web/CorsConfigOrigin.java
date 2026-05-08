@@ -11,7 +11,12 @@ import java.util.List;
 
 @Configuration
 public class CorsConfigOrigin implements WebMvcConfigurer {
-    private final List<String> allowedOrigins = List.of("http://localhost:5173", "http://localhost:8080", "http://localhost:3000");
+    private final List<String> allowedOrigins = List.of(
+            "http://192.168.102.9:5173", // IP host (mang wifi tai nha)
+            "http://localhost:5173",
+            "http://localhost:8080",
+            "http://localhost:3000"
+    );
     private final List<String> allowedMethods = List.of("GET", "POST", "PUT", "DELETE", "OPTIONS");
     private final List<String> allowedHeaders = List.of("Authorization", "Content-Type", "X-Captcha-Token", "X-VerifyAccount-Token", "X-Register-Token");
     private final List<String> exposedHeaders = List.of("Authorization");

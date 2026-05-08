@@ -43,7 +43,7 @@ function Login() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        const endpointLogin = "http://localhost:8080/api/v1/auth/login";
+        const endpointLogin = "http://192.168.102.9:8080/api/v1/auth/login";
 
         try {
             setState(prev => ({...prev, isLoading: true, errorMessage: ""}));

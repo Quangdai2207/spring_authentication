@@ -19,7 +19,7 @@ runs as process:   docker compose up --build
 
 Stop system
 docker compose down <optional [-v]>
-Ctrl + c if you run docker as process
+Press keys "Ctrl + c" if you run docker as process
 
 Run Service ports:
     1. Server on:              8080

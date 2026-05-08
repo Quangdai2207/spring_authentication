@@ -48,7 +48,12 @@ public class SpringSecurity implements WebMvcConfigurer {
 
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers(
-                                    "/",
+                                    "/index.html",
+                                    "/assets/**",
+                                    "/*.js",
+                                    "/*.css",
+                                    "/favicon.ico",
+                                    "/api/public/**",
                                     "/api/v1/auth/**",
                                     "/ws/**",
                                     "/app/**",

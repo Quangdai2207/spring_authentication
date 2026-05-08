@@ -1,0 +1,16 @@
+POST http://localhost:8080/api/public/bcrypt-generator
+Content-Type: application/json
+
+{
+  "password": "Admin@123",
+  "hashCode": ""
+}
+
+###
+POST http://localhost:8080/api/public/verify-hash?hashCode=
+Content-Type: application/json
+
+{
+  "password": "Admin@123",
+  "hashCode": "$2a$10$CXga2yEf8Loiu2btkCBhYOjc5KliQbrcdZrq0qvPj.IJQ2f3pXffq"
+}
