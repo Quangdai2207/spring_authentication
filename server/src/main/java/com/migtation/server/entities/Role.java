@@ -3,9 +3,6 @@ package com.migtation.server.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @Data
 @Builder
 @NoArgsConstructor
@@ -25,9 +22,4 @@ public class Role {
 
     @Column(name = "name", nullable = false)
     private String name;
-
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
-    private Set<UserRole> userRoles = new HashSet<>();
 }

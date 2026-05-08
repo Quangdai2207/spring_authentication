@@ -2,6 +2,7 @@ package com.migtation.server.controllers.publics;
 
 import com.migtation.server.dtos.request.BcryptGenerator;
 import com.migtation.server.dtos.response.ApiResponse;
+import com.migtation.server.services.auth.au_service_v1.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,10 +13,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/public")
 public class PublicController {
     private final PasswordEncoder passwordEncoder;
+    private final UserService userService;
 
     @Autowired
-    public PublicController(PasswordEncoder passwordEncoder) {
+    public PublicController(PasswordEncoder passwordEncoder, UserService userService) {
         this.passwordEncoder = passwordEncoder;
+        this.userService = userService;
     }
 
     // Tao hashCode Bcrypt from password

@@ -3,12 +3,10 @@ package com.migtation.server.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -45,7 +43,4 @@ public class UserEntity {
     @NotNull
     @Column(name = "password", nullable = false)
     private String password;
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<UserRole> userRoles;
 }

@@ -7,10 +7,19 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:8080/api/public/verify-hash?hashCode=
+POST http://localhost:8080/api/public/verify-hash
 Content-Type: application/json
 
 {
   "password": "Admin@123",
   "hashCode": "$2a$10$CXga2yEf8Loiu2btkCBhYOjc5KliQbrcdZrq0qvPj.IJQ2f3pXffq"
 }
+
+### Test form Basic Auth mac dinh cua Spring Boot khi tich hop Spring Security lan dau va chua thuc hien chuoi cau hinh filerChain
+### Username mac dinh cua Spring la user, password duoc cung cap trong log console ngay khi khoi dong ung dung.
+POST http://localhost:8080/api/admin/v1/welcome
+Content-Type: application/json
+Authorization: Basic base64(username:password)
+
+###
+

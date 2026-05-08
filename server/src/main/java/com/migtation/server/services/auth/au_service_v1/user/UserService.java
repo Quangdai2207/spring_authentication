@@ -13,7 +13,8 @@ public class UserService implements IUserService {
 
     @Override
     public UserEntity findByEmail(String email) {
-        return userRepositories.findByEmail(email).orElseThrow(() -> new NotFoundException("User not found"));
+        UserEntity user = userRepositories.findByEmail(email).orElseThrow(() -> new NotFoundException("User not found"));
+        return user;
     }
 
     @Override

@@ -15,7 +15,6 @@ public class UserMapper {
                 .email(body.getEmail())
                 .phone(body.getPhone())
                 .password(body.getPassword())
-                .userRoles(new HashSet<>())
                 .build();
     }
 
