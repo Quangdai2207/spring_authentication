@@ -1,6 +1,6 @@
 GET http://localhost:8080/api/v1/auth/authenticated
 Content-Type: application/json
-Cookie: access_token=yourToken
+Cookie: access_token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkYWlAZ21haWwuY29tIiwiaWF0IjoxNzc4MjU1MzgyLCJleHAiOjE3NzgyNTU0NTJ9.zgXBVJdMPFjz9pqPA043e-dzFnhznwwQTDntJyv-GmMckzH_ycdzPMZzXN-Eq-ZEvK7ZESmXPm5eLIwSEPj1wg
 
 ###
 POST http://localhost:8080/api/v1/auth/login
@@ -32,5 +32,5 @@ GET http://localhost:5050/api/admin/v1/welcome
 Content-Type: application/json
 
 ### Test Authorize with ADMIN by role USER
-GET http://localhost:5050/api/client/v1/welcome
+GET http://localhost:8080/api/admin/v1/welcome
 Content-Type: application/json
